@@ -1,0 +1,245 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img id="audree_logo" src="../assets/audreelogo.jpeg.jpg" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/screen1">SCREEN1</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/screen2">SCREEN2</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/screen3">SCREEN3</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/screen4">SCREEN4</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/screen5">SCREEN5</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/screen6">SCREEN6</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/screen7">SCREEN7</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/multiselect">MultiSelect</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/configuration">Configuration</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/bulkupload">Bulkupload</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/bulk-parent-child">ParentChildBulk</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/temperature">Temperature</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img id="audree_logo" src="../assets/audreelogo.jpeg.jpg" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/status-slider">StatusSlider</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/qrcode">QRCode</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <router-outlet></router-outlet> -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img id="audree_logo" src="../assets/audreelogo.jpeg.jpg" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+  <mat-tab-group animationDuration="500ms" dynamicHeight>
+    
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Screen1
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/screen1">SCREEN1</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Screen2
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/screen2">SCREEN2</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Screen3
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/screen3">SCREEN3</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Screen4
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/screen4">SCREEN4</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Screen5
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/screen5">SCREEN5</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Screen6
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/screen6">SCREEN6</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Screen7
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/screen7">SCREEN7</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        Dashboard
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/dashboard">DASHBOARD</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      Home
+    </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/home">HOME</a>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+        MultiSelect
+      </ng-template>
+      <div class="example-small-box mat-elevation-z4">
+        <a routerLink="/multiselect">MULTISELECT</a>
+      </div>
+    </mat-tab>
+
+
+    
+  </mat-tab-group> 
+</ul>
+</div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img id="audree_logo" src="../assets/audreelogo.jpeg.jpg" alt="">
+  </a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+<mat-tab-group animationDuration="500ms" dynamicHeight>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      Configuration
+    </ng-template>
+    <div class="example-small-box mat-elevation-z4">
+      <a routerLink="/configuration">CONFIGURATION</a>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      Bulkupload
+    </ng-template>
+    <div class="example-small-box mat-elevation-z4">
+      <a routerLink="/bulkupload">BULKUPLOAD</a>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      Temperature
+    </ng-template>
+    <div class="example-small-box mat-elevation-z4">
+      <a routerLink="/temperature">TEMPERATURE</a>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      QR Code
+    </ng-template>
+    <div class="example-small-box mat-elevation-z4">
+      <a routerLink="/qrcode">QR CODE</a>
+    </div>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+      BulkParentChild
+    </ng-template>
+    <div class="example-small-box mat-elevation-z4">
+      <a routerLink="/bulkp"> BulkParentChild</a>
+    </div>
+  </mat-tab>
+</mat-tab-group> 
+</ul>
+</div>
+</nav>
+ 
+  <router-outlet></router-outlet>
+
+  

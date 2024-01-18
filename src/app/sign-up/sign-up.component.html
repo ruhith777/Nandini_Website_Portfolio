@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+      <div class="card auth">
+        <div class="card-body auth-card">
+          <div class="auth-avatar">
+            <img src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png" alt="user" class="user-image">
+          </div>
+          <form [formGroup]="formapi">
+              <div class="form-group">
+                <label for="name">Name : <span style="color: red;">*</span>: </label>
+                <input type="text" name="name" class="form-control" placeholder="Name" formControlName="name">
+                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('name').errors">
+                  Name Required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="mobile">Mobile : <span style="color: red;">*</span>: </label>
+                <input type="text" name="mobile" class="form-control" placeholder="mobile" formControlName="mobile">
+                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('mobile').errors">
+                  Mobile Required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email : <span style="color: red;">*</span></label>
+                <input type="text" name="email" class="form-control" placeholder="Email" formControlName="email">
+                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('email').errors">
+                  Email Required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="username">Username : <span style="color: red;">*</span></label>
+                <input type="text" name="username" class="form-control" placeholder="Username" formControlName="username">
+                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('username').errors">
+                  Username Required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password : <span style="color: red;">*</span></label>
+                <input type="password" name="password" class="form-control"  formControlName="password">
+                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('password').errors">
+                  Password Required
+                </div>
+                <div>
+                  <label><input type="checkbox" [checked]="passwordRequirements.capital"> Capital letter</label>
+                  <label><input type="checkbox" [checked]="passwordRequirements.small"> Small letter</label>
+                  <label><input type="checkbox" [checked]="passwordRequirements.number"> Number</label>
+                  <label><input type="checkbox" [checked]="passwordRequirements.special"> Special character</label>
+                  <label><input type="checkbox" [checked]="passwordRequirements.length"> Minimum 8 characters</label>
+                </div>
+              
+                <div style="color: red;" *ngIf="formapi.get('password').hasError('minlength')">
+                  Password must be at least 8 characters long
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password : <span style="color: red;">*</span></label>
+                <input type="confirmPassword" name="confirmPassword" class="form-control" placeholder="********" formControlName="confirmPassword">
+                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('confirmPassword').errors">
+                  Confirmation is Required
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <label for="c_password">Confirm Password : </label>
+                <input type="password" name="c_password" class="form-control" placeholder="********" [(ngModel)]="userData.c_password">
+              </div> -->
+              <div class="text-center">
+                <button class="btn btn-my" (click)="login1()">Signup</button>                  
+             &nbsp;
+             &nbsp;
+                
+                <button class="btn btn-my" (click)="Reset()">Reset</button>                  
+              </div>
+              &nbsp;
+              <div class="text-center login">
+                Already have an account ? <a routerLink="/login">Login</a> here.
+              </div>
+              
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

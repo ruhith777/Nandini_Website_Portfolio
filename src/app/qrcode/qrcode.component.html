@@ -1,0 +1,5 @@
+<input [(ngModel)]="name"> <p>{{name}}</p>
+<qrcode #qrElement [qrdata]="name" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+<a>Download</a>
+<button (click)="downloadQRCode(qrElement)">Download QR Code</button>

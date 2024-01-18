@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of, tap } from 'rxjs';
+import { DatePipe } from '@angular/common';
+import htmlToPdfmake from "html-to-pdfmake";
+import * as pdfMake from 'pdfmake/build/pdfmake';
+
 @Injectable({
   providedIn: 'root'
 })
 export class Task1Service {
   url: string = 'https://localhost:44302/api'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private datepipe: DatePipe) { }
   CreateOrUpdate(obj: any) {
     debugger
     return this.http.post(this.url + '/CurrencyMaster/Create', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
@@ -172,6 +176,87 @@ DashboardAlreadyExist(obj:any){
   //https://localhost:44302/api/Dashboard/AlreadyExist
   
 }
+MultiCreateOrUpdate(obj: any) {
+  debugger
+  return this.http.post(this.url + '/MultiSelect/CreateorUpdate', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+MultionGet() {
+  return this.http.get(this.url + '/MultiSelect/GetAllDetails').pipe(map(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+MultigetById(id: number) {
+  debugger
+  //https://localhost:44302/api/CurrencyMaster/details?id=1
+  return this.http.get(this.url + '/MultiSelect/GetDetailsById?id=' + id).pipe(map(this.extractData), catchError(this.handleError<any>(' getById Failed')));
+}
+MultiAlreadyExistedd(obj:any){
+  return this.http.post(this.url + '/MultiSelect/isAlreadyExisted', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+
+}
+LoginCreate(obj: any) {
+  debugger
+  return this.http.post(this.url + '/Login/CreateOrUpdate', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+Signin(obj:any) {
+  debugger
+  return this.http.post(this.url + '/Login/SignIn', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+ConfigCreate(obj: any) {
+  debugger
+  return this.http.post(this.url + '/Configuration/Create', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+ConfigList() {
+  return this.http.get(this.url + '/Configuration/GetAll').pipe(map(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+ConfigGetById(id: number) {
+  debugger
+  //https://localhost:44302/api/CurrencyMaster/details?id=1
+  return this.http.get(this.url + '/Configuration/details?id=' + id).pipe(map(this.extractData), catchError(this.handleError<any>(' getById Failed')));
+}
+uploadExcelData(obj: any) {
+  debugger
+  return this.http.post(this.url + '/Test1/bulkUpload', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+uploadParentChild(obj: any) {
+  debugger
+  return this.http.post(this.url + '/Bulk/bulkUpload', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+StatusSliderList() {
+  return this.http.get(this.url + '/StatusSlider/List').pipe(map(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+StatusSliderCreate(obj: any) {
+  debugger
+  return this.http.post(this.url + '/StatusSlider/Create', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+StatusSliderGetById(id: number) {
+  debugger
+  return this.http.get(this.url + '/StatusSlider/details?id=' + id).pipe(map(this.extractData), catchError(this.handleError<any>(' getById Failed')));
+}
+StatusSliderEnable(obj:any){
+  let httpHeaders = new HttpHeaders();
+
+  return this.http.put<any>('/StatusSlider/enable',  obj,{headers: httpHeaders}).pipe(tap(this.extractData), catchError(this.handleError<any>('Post Failed')));
+
+}
+StatusSliderDisable(obj:any){
+  let httpHeaders = new HttpHeaders();
+
+  return this.http.put<any>('/StatusSlider/disable',  obj,{headers: httpHeaders}).pipe(tap(this.extractData), catchError(this.handleError<any>('Post Failed')));
+
+}
+StatusSliderUpdate(){
+  let httpHeaders = new HttpHeaders();
+
+  return this.http.put<any>('/StatusSlider/update',{headers: httpHeaders}).pipe(tap(this.extractData), catchError(this.handleError<any>('Post Failed')));
+
+}
+StatusSliderHasExist(method: string): Observable<any> {
+  return this.http.get<any>('/StatusSlider/Hasexist').pipe(catchError(this.handleError<any>('Get Failed')));
+}
+BulkuploadCreate(obj: any) {
+  debugger
+  return this.http.post(this.url + '/Bulk/createorupdatelist', obj).pipe(tap(this.extractData), catchError(this.handleError<any>(' getAll Failed')));
+}
+
 path: string = "./assets/audreelogo.jpeg.jpg" 
   extractData(res: Response) {
     let body = res;

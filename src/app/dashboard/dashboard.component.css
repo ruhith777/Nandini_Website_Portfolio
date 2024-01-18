@@ -21,3 +21,16 @@ a:link {
     background-color: transparent;
     text-decoration: underline;
   }
+  form{
+    position: fixed; 
+   top: 50%; 
+   left: 50%; 
+   transform: translate(-50%, -50%); 
+   max-width: 450px;
+    padding: 40px;
+   background-color: rosybrown;
+   border: 1px grey;
+   border-radius: 10px;
+   box-shadow: black;
+ z-index: 1000;
+ }

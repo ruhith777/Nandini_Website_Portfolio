@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<div>
+    <h2>MultiSelect:</h2>
+    <button class="btn btn-success mt22" (click)="onpopup()"><span class="fa fa-plus-circle"></span>Create</button>
+    &nbsp;
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>CompanyName</th>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data, index as index">
+                <td>{{index+1}}</td>
+                <td>{{item.companyName}}</td>
+                <td>{{item.status?'Enable':'Disable'}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td> <button class="btn btn-primary" type="submit" (click)="OnEdit(item.id)"><i
+                            class="fa fa-pencil"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="p-5">
+    <div class="col-md-12">
+        <div class="modalW" role="dialog" *ngIf="showForm" data-backdrop="false">
+            <div style="padding: 0px 250px 0px 250px;" class="modal-content">
+                <form [formGroup]="myForm">
+                    <div class="modal-body">
+                        <button Name="button" align="right" class="btn btn-danger" (click)="closePopup()"
+                            data-dismiss="modal">X</button>
+                        <h2 *ngIf="isCreate" class="modal-title">Create</h2>
+                        <h2 *ngIf="!isCreate" class="modal-title">Update</h2>
+                        <div class="container">
+                            <div class="form-group">
+                                <label class="yes" for="company_Id">Company</label>
+                                <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="AllCompaniesdata"
+                                    formControlName="company_Id" (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)" [formControl]="myForm.controls['company_Id']">
+                                </ng-multiselect-dropdown>
+                                <!-- <div style="color: red" *ngIf="company_Id.invalid && (company_Id.dirty|| submitted)">
+                                    Company is required
+                                </div> -->
+                            </div>
+                            <div *ngIf="isFieldVisible">
+                                <div class="form-group"> <label for="name">Name<span
+                                            style="color: red;">*</span></label> <input type="text" class="form-control"
+                                        id="name" formControlName="name" placeholder="Please Enter Name">
+                                </div>
+                                <div style="color: red;" *ngIf="isSubmit && this.myForm.get('name').errors">
+                                    Name is required
+                                </div>
+                                <div class="form-group"> <label for="age">Age<span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="age" formControlName="age"
+                                        placeholder="Please Enter Age">
+                                    <div style="color: red;" *ngIf="isSubmit && this.myForm.get('age').errors">
+                                        Age is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!isCreate">
+                                <label for="status">Status<span style="color: red;">*</span></label>
+                                <input type="checkbox" id="enable" name="status" value="1" formControlName="status">
+                                <label for="enable">Enable</label>
+                            </div>
+                                <div>
+                                    <button class="btn btn-primary" (click)="isCreate ? onSubmit() : Update()">{{isCreate ? "Create" :
+                                        "Update"}}</button>
+                                </div>
+                          
+                        </div>
+                    </div>
+                </form>
+            </div>

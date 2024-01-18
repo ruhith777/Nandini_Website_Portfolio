@@ -1,0 +1,44 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+#audree_logo
+{
+    width: 100px;
+    height: 90px;
+}
+ul
+{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+.example-tab-icon {
+  margin-right: 8px;
+}
+  li {
+    margin: 10px;
+  }
+  a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  a.active {
+    background-color: #ddd;
+  }
+  .example-small-box, .example-large-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .example-small-box {
+    height: 60px;
+    width: 150px;
+  }
+  
+ 

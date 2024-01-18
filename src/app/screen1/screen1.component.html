@@ -23,16 +23,6 @@
           <div style="color: red;" *ngIf="isSubmit && this.formapi.get('country').errors">
             Country Required
           </div>
-
-          <div>
-            <label for="company_Id">Select Options:</label>
-            <select id="company_Id" formControlName="company_Id" multiple>
-              <option *ngFor="let option of AllCompaniesdata" [value]="option.id">
-                {{ option.companyName }}
-              </option>
-            </select>
-          </div>
-
           <br>
           <div *ngIf="!isCreate">
             <label for="status">status<span style="color:red;">*</span></label>
@@ -57,9 +47,7 @@
           <th>Country</th>
           <th>Status</th>
           <th>Action</th>
-
         </tr>
-
       </thead>
       <tbody>
         <tr *ngFor="let item of arrayAll,let i=index">
@@ -70,8 +58,27 @@
           <td>
             <a class="btn btn-primary" (click)="OnEdit(item.sNo)"><i class="fa fa-pencil"></i></a>
           </td>
-          <!-- <td> <a  (click)="delete(item.sNo)"><i class="fa fa-trash"></i></a></td> -->
         </tr>
       </tbody>
     </table>
   </div>
+  <!-----------------------export-------------------------->
+
+  <div style="display: none;" id=ExportTable>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="50px">S.No.</th>
+                <th width="290px">Currency</th>
+                <th width="290px">Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of arrayAll, let i=index">
+                <td>{{i+1}}</td>
+                <td>{{item.currency}}</td>
+                <td>{{item.country}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

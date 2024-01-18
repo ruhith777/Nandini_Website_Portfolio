@@ -1,26 +1,26 @@
-form{
-     position: fixed; /* Change to 'fixed' for a popup that stays in the same position relative to the viewport */
-    top: 50%; /* Vertically center the form */
-    left: 50%; /* Horizontally center the form */
-    transform: translate(-50%, -50%); /* Center the form precisely */
+/* form{
+     position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     max-width: 450px;
      padding: 40px;
     background-color: rosybrown;
     border: 1px grey;
     border-radius: 10px;
     box-shadow: black;
-    z-index: 1000;
-  }
+  z-index: 1000;
+  } */
   table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     margin-top: 1em;
     width: 100%;
   }
-  .btn-text-right{
+  /* .btn-text-right{
     text-align: right;
     position: center;
-  }
+  } */
   td, th {
     border: black;
     border-style: dotted;
@@ -72,5 +72,11 @@ form{
   transform: scale(1.1);
   border-bottom: 4px solid #ff8d00;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+
+/* Add application styles & imports to this file! */
+/* @import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
+@import url('../node_modules/simple-keyboard/build/css/index.css'); */

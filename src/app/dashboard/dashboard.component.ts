@@ -1,12 +1,10 @@
-
 import { Component, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DashBoard } from '../dash-board';
- import { Task1Service } from '../task1.service';
+import { Task1Service } from '../task1.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
- 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -41,9 +39,7 @@ export class DashboardComponent {
   ArrayFlag: boolean=false;
   childid: number;
   arrayyy: any;
-  constructor(private org: Task1Service,
-    private _fb: FormBuilder
-  ) { }
+  constructor(private org: Task1Service, private _fb: FormBuilder) {}
   array = [];
   orgdetails: FormGroup;
   ngOnInit() {

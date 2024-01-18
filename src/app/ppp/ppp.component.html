@@ -1,0 +1,18 @@
+<form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+  
+    <div>
+      <label><input type="checkbox" [checked]="passwordRequirements.capital"> Capital letter</label>
+      <label><input type="checkbox" [checked]="passwordRequirements.small"> Small letter</label>
+      <label><input type="checkbox" [checked]="passwordRequirements.number"> Number</label>
+      <label><input type="checkbox" [checked]="passwordRequirements.special"> Special character</label>
+      <label><input type="checkbox" [checked]="passwordRequirements.length"> Minimum 8 characters</label>
+    </div>
+  
+    <div *ngIf="passwordForm.get('password').hasError('minlength')">
+      Password must be at least 8 characters long
+    </div>
+  
+    <button type="submit" [disabled]="passwordForm.invalid">Submit</button>
+  </form>

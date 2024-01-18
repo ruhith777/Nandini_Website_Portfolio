@@ -1,0 +1,20 @@
+<!-- <div>
+    <input type="file" (change)="Bulkuploadofexcel($event)" />
+    <button (click)="submit()">Submit</button>
+</div> -->
+<!-- <div>
+  <input type="file" (change)="Bulkuploadofexcel($event)" />
+  <button (click)="submit()">Submit</button>
+  <mat-progress-spinner *ngIf="uploading" mode="indeterminate"></mat-progress-spinner>
+</div> -->
+<!-- <div>
+  <input type="file" (change)="Bulkuploadofexcel($event)" />
+  <button (click)="submit()">Submit</button>
+  <mat-spinner *ngIf="uploading" diameter="50"></mat-spinner>
+</div> -->
+<div>
+  <input type="file" (change)="Bulkuploadofexcel($event)" />
+  <button (click)="submit()">Submit</button>
+  <mat-spinner *ngIf="uploading" [value]="uploadProgress" mode="determinate" diameter="100"></mat-spinner>
+  
+</div>

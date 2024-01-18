@@ -44,14 +44,47 @@
                         <h2 *ngIf="isCreate" class="modal-title">Create</h2>
                         <h2 *ngIf="!isCreate" class="modal-title">Update</h2>
                         <div class="container">
-                            <div class="form-group"> <label for="company_Id">CompanyName<span
+                            <!-- <div class="form-group"> <label for="company_Id">CompanyName<span
                                         style="color: red;">*</span></label> <select formControlName="company_Id"
                                     class="form-control">
                                     <option value="" hidden [selected]="true">--Select--</option>
                                     <option *ngFor="let i of AllCompaniesdata" [value]="i.id">{{i.companyName}}
                                     </option>
                                 </select>
+                            </div> -->
+                            <div class="form-group">
+                                <label class="yes">CompanyName</label>
+                                <select (change)="OnChangeEvent($event.target.value)" class="form-control"
+                                  formControlName="company_Id">
+                                  <option [ngValue]="null" disabled hidden [selected]="true">
+                                    --Select--
+                                  </option>
+                                  <option *ngFor="let item of AllCompaniesdata" [value]="item.id">
+                                    {{ item.companyName }}
+                                  </option>
+                                </select>
                             </div>
+                            <!-- <div *ngIf="isotherselected" class="row">
+                                <div class="col-md-12">
+                                  <div class="form-group">
+                                    <label class="yes bold">Other Selected</label>
+                                    <textarea formControlName="OtherSelected" type="text"></textarea>
+                                  </div>
+                                  <div style="color: red;" *ngIf="isSubmit && this.myForm.get('OtherSelected').errors">
+                                    OtherSelected is required
+                                </div>
+                              </div>
+                              </div> -->
+                              <div *ngIf="isotherselected">
+                              <div class="form-group"> <label for="OtherSelected">OtherSelected<span
+                                style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="email" formControlName="OtherSelected"
+                            placeholder="Please Enter OtherSelected">
+                        <div style="color: red;" *ngIf="isSubmit && this.myForm.get('OtherSelected').errors">
+                            OtherSelected is required
+                        </div>
+                    </div>
+                    </div>
                             
                                 <div class="form-group"> <label for="plant_Id">PlantName<span
                                             style="color: red;">*</span></label>
@@ -61,6 +94,7 @@
                                             {{i.plantName}}
                                     </select>
                                 </div>
+                                
                             <div *ngIf="isFieldVisible">
                                 <div class="form-group"> <label for="ownerName">OwnerName<span
                                             style="color: red;">*</span></label> <input type="text" class="form-control"

@@ -7,10 +7,10 @@ import { DatePipe } from '@angular/common';
 import { DataTableDirective } from 'angular-datatables';
 import { DataTablesModule } from 'angular-datatables/src/angular-datatables.module';
 import { Subject } from 'rxjs';
-import * as ClassicEditor from '@ckeditor/ckeditor5-angular';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-angular';
 // import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @Component({
   selector: 'app-screen2',
   templateUrl: './screen2.component.html',
@@ -40,8 +40,9 @@ export class Screen2Component implements OnInit {
   };
   createddate: any;
   constructor(private _service: Task1Service, private _formbuilder: FormBuilder, private datepipe: DatePipe) { }
-  public Editor=ClassicEditor;
-  public editorData='<p>Nandini</p>';  ngOnInit(): void {
+  // public Editor=ClassicEditor;
+  // public editorData='<p>Nandini</p>';  
+  ngOnInit(): void {
     debugger
     this.getAllAPIdata();
     this.getAllCurency();

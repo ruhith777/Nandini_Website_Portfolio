@@ -10,5 +10,8 @@ import Swal from 'sweetalert2';
 })
 export class AppComponent implements OnInit{
   constructor(){}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+  path: string = "./assets/clockimage.jpg"
+  
 }

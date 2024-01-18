@@ -67,6 +67,19 @@
   button {
     margin-right: 50px;
   }
+  form{
+    position: fixed; 
+   top: 50%; 
+   left: 50%; 
+   transform: translate(-50%, -50%); 
+   max-width: 450px;
+    padding: 40px;
+   background-color: rosybrown;
+   border: 1px grey;
+   border-radius: 10px;
+   box-shadow: black;
+ z-index: 1000;
+ }
    
   .star {
     color: red;

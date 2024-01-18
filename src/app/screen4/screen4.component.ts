@@ -14,10 +14,14 @@ export class Screen4Component implements OnInit{
   formapi: FormGroup
   obj: Company
   arrayAll = [];
+  FlagEnable: boolean;
+  FlagDisable: boolean;
   isCreate: boolean = true;
   showForm: Boolean;
   primaryKey: number;
   isSubmit: boolean = false;
+  popUpTitle: string;
+
   status: number;
   selectedOption: string = ''
   isRequired: boolean = false;
@@ -32,6 +36,7 @@ dtOptions: DataTables.Settings = {
   pagingType: 'full_numbers',
   pageLength: 10,
 };
+  comments: any;
   constructor(private _service: Task1Service, private _formbuilder: FormBuilder) { }
 ngOnInit(): void {
  debugger
@@ -58,6 +63,7 @@ InitializeForm() {
     companyCode: new FormControl('',Validators.required),
     address: new FormControl('',Validators.required),
     status: new FormControl(),
+    comments:new FormControl()
   });
 }
 getAllAPIdata() {
@@ -83,6 +89,7 @@ getValues() {
     companyCode: this.formapi.value.companyCode,   //setting value from function
     address: this.formapi.value.address,
     status: +this.formapi.value.status,
+    comments:this.formapi.value.comments
   }
 }
 PostToApi() {
@@ -143,6 +150,12 @@ Update() {
   this.formapi.reset();
   this.onpopup();
 }
+getById(id){
+  this._service.getCompanyDetails(id).subscribe((res: any) => {
+    this.obj = res;
+
+  });
+}
 OnEdit(id: any) {
   debugger
   this.isCreate = false;
@@ -152,6 +165,36 @@ OnEdit(id: any) {
     this.obj && this.setvalue();
     this.onpopup();
   });
+}
+onclickToggle(value,id){
+  this.getById(id);
+  if(value==true){
+    this.onEnable(id)
+  }else{
+    this.onDisable(id)
+  }
+}
+onEnable(id){
+  this.onpopup();
+  this.isCreate=false;
+  this.FlagEnable=false;
+  this.isCreate = false;
+  this.popUpTitle = "Disable Meta Fields";
+  this.FlagEnable=true;
+  this.FlagDisable=false;
+  this.getById(id);
+  this.comments.enable();
+}
+onDisable(id){
+  this.FlagDisable=false;
+  this.isCreate=false;
+  this.onpopup();
+  this.isCreate = false;
+  this.popUpTitle = "Enable MetaFields";
+  this.FlagEnable=false;
+  this.FlagDisable=true;
+  this.getById(id);
+  this.comments.enable();
 }
 setvalue() {
   debugger

@@ -1,0 +1,91 @@
+<div class="p-5">
+    <div class="btn-text-right">
+        <button class="btn btn-success mt22" (click)="onpopup()"><span class="fa fa-plus-circle" ></span> Create</button>
+    </div>
+
+    <div id="tableName">Configuration</div>
+
+    <div class="modalW" role="dialog" *ngIf="showForm" data-backdrop="false">
+        <div style="padding: 0px 250px 0px 250px;" class="modal-content">
+            <div class="modal-body">
+               
+                <form [formGroup]="formapi">
+                    <button Name="button" align="right" class="btn btn-danger" (click)="closePopup()" data-dismiss="modal">&times;</button>
+                    <h2 *ngIf="isCreate" class="modal-title">Create</h2>
+                    <h2 *ngIf="!isCreate" class="modal-title">Update</h2>                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="yes">Name</label>
+                            <select class="form-control" formControlName="company_Id" (change)="Onchange()">
+                                <option [ngValue]="null" disabled placeholder="--select--">--Select--</option>
+                                <option *ngFor="let item of arrayAllData" [value]="item.id">
+                                    {{item.name}}
+                                </option>
+                                
+                            </select>
+                        </div>
+                        <label for="companyName">Company Name</label>
+                        <select class="form-control" formControlName="companyName">
+                            <option [ngValue]="null" disabled placeholder="--select--">--Select--</option>
+                                <option *ngFor="let item of companyArr" [value]="item.id">
+                                    {{item.companyName}}
+                                </option>
+                                </select>
+                        <label for="college">College</label>
+                        <input type="text" class="form-control" formControlName="college"
+                            placeholder="Enter College" appTrim>
+                           
+                        <!-- <div *ngIf="!isCreate">
+                            <label for="status">status<span style="color:red;">*</span></label>
+                            <input type="checkbox" id="enable" name="status" value="1" formControlName="status"
+                                placeholder="Enter Status">
+                               
+                            <label for="enable">Enable</label>
+                        </div> -->
+                        <!-- <div *ngIf="!isCreate">
+                            <label for="comments">Comments<span style="color: red;">*</span></label>
+                            <input [editor]="Editor" [data]="editorData" formControlName="comments">                        </div> -->
+
+                        <div class="form-group"> <label for="date">Dob</label> <input type="date" class="form-control"
+                        id="dob" formControlName="dob" placeholder="Please Enter Dob" >
+                </div>
+
+                        <br>
+                        <button class="btn btn-primary" (click)=" Submit()">{{isCreate ?"Create" :
+                            "Update"}}</button>
+                        <!-- &nbsp;
+
+                        <button class="btn btn-danger" (click)="Cancel()">Cancel</button>
+                        &nbsp;
+
+                        <button class="btn btn-warning" (click)="Reset()">Reset</button> -->
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<h3>List</h3>
+<div>
+        <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CompanyName</th>
+                <th>Dob</th>
+                <th>College</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr *ngFor="let item of arrayAll,let i=index ">
+                    <td>{{i+1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.companyName}}</td>
+                    <td>{{item.dob}}</td>
+                    <td>{{item.college}}</td>
+                    
+                </tr>
+            </tbody>
+    </table>
+</div>

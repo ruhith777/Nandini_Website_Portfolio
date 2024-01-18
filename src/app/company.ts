@@ -4,4 +4,5 @@ export class Company {
     companyCode:string
     address:string
     status:number
+    comments:string
 }

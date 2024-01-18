@@ -17,6 +17,7 @@ export class Screen6Component implements OnInit {
   // submitted: Boolean = false;
   showForm: boolean = false;
   editObj: any;
+  isotherselected:boolean;
   isCreate: boolean = true;
   isShowTempTable: boolean = false;
   orgChild: OrganizationChild;
@@ -56,8 +57,32 @@ export class Screen6Component implements OnInit {
     this.GetCompanyDropdown();
     this.GetPlantDropDown();
     this.InitializeForm();
-    
+    // this.myForm = this._formbuilder.group({
+    //   otherValue: ['']
+    // });
+    // this.myForm.get('companyName').valueChanges.subscribe(option => {
+    //   if (option !== 'other') {
+    //     // Reset the otherValue when a different option is selected
+    //     this.myForm.get('otherValue').setValue('');
+    //   }
+    // });
   }
+
+  OnChangeEvent(id: any) {
+     var a = this.AllCompaniesdata.find(s => s.id == id);
+     if (a.companyName.toUpperCase() == 'OTHER') {
+       this.isotherselected = true;
+       this.myForm.controls['OtherSelected'].setValidators(Validators.required);
+     }
+     else {
+       this.isotherselected = false;
+       this.myForm.get('OtherSelected').clearValidators();
+       this.myForm.get('OtherSelected').updateValueAndValidity();
+     }
+  
+  
+   }
+
   InitializeForm() {
     this.myForm = this._formbuilder.group({
       companyName: new FormControl(''),
@@ -67,6 +92,7 @@ export class Screen6Component implements OnInit {
       ownerName: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
       status: new FormControl(''),
+      OtherSelected:new FormControl('',Validators.required),
       comments: new FormControl(''),
       pinCode: new FormControl('', Validators.required),
       organizationId: new FormControl('')
@@ -78,6 +104,7 @@ export class Screen6Component implements OnInit {
     debugger
     this._service.organizationList().subscribe(res => {
       try {
+        debugger
         this.data = res;
         this.data.forEach(element => {
           element.organization.length == 0 ? element.ownerName = "NA" :
@@ -176,102 +203,110 @@ export class Screen6Component implements OnInit {
     }
     this.getValues();
     //this.AlreadyExist();
-    this.postToApi1();
+    this.postToApi();
     this.showForm = false;
     this.myForm.reset;
   }
 
-  // postToApi() {
-  //   debugger
-  //   this.isSubmit = true;
-  //   this._service.organizationCreate(this.org).subscribe((result) => {
-  //     try {
-  //       var result = result;
-  //       this.GetAll();
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   },
-  //     (err: HttpErrorResponse) => {
-  //       console.log(err.message);
-  //     });
-  // }
-  postToApi1()
-  {
+  postToApi() {
     debugger
-    this._service.AlreadyExistOrg(this.org).subscribe(data => {
-      try
-      {
-          if(data.item1 == "Employee Created Successfully" || data.item1 == "Employee Updated  Successfully")
-          {
-            Swal.fire(
-              {
-                title: this.isCreate ?  'Do you want create?' : 'Do you want to update?',
-                    showDenyButton: true,
-                   //showCancelButton: true,
-                    confirmButtonText: 'Yes',
-                    denyButtonText: `No`
-              }
-            ).then(result =>{
-              if(result.isConfirmed)
-              {
-                this._service.organizationCreate(this.org).subscribe((data):any => {
-                  try
-                  {
-                      this.GetAll();
-                      this.refid=0;
-                      Swal.fire({
-                        icon:'success',
-                        text: this.isCreate ? "Well done!!Created succesfully" : "Updated Succesfully"
-                      })
-                      this.myForm.reset();
-                      this.closePopup();
-                    //  this.setValidationsForm();
-                  }
-                  catch(error)
-                  {
-                    console.log(error);
-                  }
-                })
-              }
-              else if (result.isDenied)
-              {
-                return
-              }
-            })
-          }
-          else if(data.item1 == "Details Already Existed")
-          {
-            Swal.fire({
-              icon:'warning',
-              text:"Already exist"
-            })
-           // this.setValidationsForm();
-           
-          }
-          else
-          {
-            Swal.fire({
-              icon:'warning',
-              text:"No Changes Updated"
-            })
-           // this.setValidationsForm();
-          }
+    this.isSubmit = true;
+    this._service.organizationCreate(this.org).subscribe((result) => {
+      try {
+        var result = result;
+        this.GetAll();
+      } catch (error) {
+        console.error(error);
       }
-      catch(error)
-      {
-          console.log(error)
-      }
-    })
-   
+    },
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      });
   }
+  // postToApi1()
+  // {
+  //   debugger
+  //   this._service.AlreadyExistOrg(this.org).subscribe(data => {
+  //     try
+  //     {
+  //         if(data.item1 == "Employee Created Successfully" || data.item1 == "Employee Updated  Successfully")
+  //         {
+  //           Swal.fire(
+  //             {
+  //               title: this.isCreate ?  'Do you want create?' : 'Do you want to update?',
+  //                   showDenyButton: true,
+  //                  //showCancelButton: true,
+  //                   confirmButtonText: 'Yes',
+  //                   denyButtonText: `No`
+  //             }
+  //           ).then(result =>{
+  //             if(result.isConfirmed)
+  //             {
+  //               this._service.organizationCreate(this.org).subscribe((data):any => {
+  //                 try
+  //                 {
+  //                     this.GetAll();
+  //                     this.refid=0;
+  //                     Swal.fire({
+  //                       icon:'success',
+  //                       text: this.isCreate ? "Well done!!Created succesfully" : "Updated Succesfully"
+  //                     })
+  //                     this.myForm.reset();
+  //                     this.closePopup();
+  //                   //  this.setValidationsForm();
+  //                 }
+  //                 catch(error)
+  //                 {
+  //                   console.log(error);
+  //                 }
+  //               })
+  //             }
+  //             else if (result.isDenied)
+  //             {
+  //               return
+  //             }
+  //           })
+  //         }
+  //         else if(data.item1 == "Details Already Existed")
+  //         {
+  //           Swal.fire({
+  //             icon:'warning',
+  //             text:"Already exist"
+  //           })
+  //          // this.setValidationsForm();
+           
+  //         }
+  //         else
+  //         {
+  //           Swal.fire({
+  //             icon:'warning',
+  //             text:"No Changes Updated"
+  //           })
+  //          // this.setValidationsForm();
+  //         }
+  //     }
+  //     catch(error)
+  //     {
+  //         console.log(error)
+  //     }
+  //   })
+   
+  // }
 
   getValues() {
     debugger
+    var data=this.AllCompaniesdata.find(x => x.id == +this.myForm.controls['company_Id'].value)?.id;
+    if(data==20){
+      var data1=this.myForm.controls['OtherSelected'].value;
+      
+    } 
+    else{
+      var data1=this.AllCompaniesdata.find(x => x.id == +this.myForm.controls['company_Id'].value)?.companyName;
+    }
     this.org = {
       id: this.isCreate ? 0 : this.editObj.id,
       company_Id: +this.myForm.controls['company_Id'].value,
-      companyName: this.AllCompaniesdata.find(x => x.id == +this.myForm.controls['company_Id'].value)?.companyName, 
+      companyName: data1,
       plant_Id: +this.myForm.controls['plant_Id'].value,
       plantName: this.AllPlantsdata.find(x => x.id == +this.myForm.controls['plant_Id'].value)?.plantName,
       status: +this.myForm.value.status,

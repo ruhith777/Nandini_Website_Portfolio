@@ -1,0 +1,46 @@
+        <div class="row">
+          <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <div class="card auth">
+              <div class="card-body auth-card">
+                <div class="auth-avatar">
+                  <img src="https://pluspng.com/img-png/user-png-icon-account-avatar-human-male-man-men-people-person-download-svg-download-png-edit-icon-512.png" alt="user" class="user-image">
+                </div>
+                <form [formGroup]="formapi">
+                  <div class="form-group">
+                    <label for="username">Username : <span style="color: red;">*</span></label>
+                    <input type="text" name="username" class="form-control" placeholder="Username" formControlName="username">
+                    <div style="color: red;" *ngIf="isSubmit && this.formapi.get('username').errors">
+                      Username Required
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password : <span style="color: red;">*</span></label>
+                    <input type="password" name="password" class="form-control" placeholder="********" formControlName="password">
+                    <div style="color: red;" *ngIf="isSubmit && this.formapi.get('password').errors">
+                      Password Required
+                    </div>
+                    <div class="text-right forget-pass">
+                      <a routerLink="/forget-password">Forget Password ?</a>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button class="btn btn-my" (click)="login()">Login</button>
+                    &nbsp;
+                    &nbsp;
+                    <button class="btn btn-my" (click)="Cancel()">Cancel</button>
+                    &nbsp;
+                    &nbsp;
+                    <button class="btn btn-my" (click)="Reset()">Reset</button> 
+                    </div>
+                    &nbsp;
+                </form>
+                <div class="text-center sign-up">
+                  Don't have an account ? <a routerLink="/sign-up">Sign Up</a> here.
+                </div>            
+              </div>
+            </div>
+          </div>
+        </div>
+        
+  
+  

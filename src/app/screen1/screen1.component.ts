@@ -1,24 +1,22 @@
-import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task1Service } from '../task1.service';
 import Swal from 'sweetalert2';
 import { Master } from '../master';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import jsPDF from 'jspdf';
 @Component({
   selector: 'app-screen1',
   templateUrl: './screen1.component.html',
   styleUrls: ['./screen1.component.css']
 })
 export class Screen1Component implements OnInit {
-  @ViewChild('content',{static:false}) el!:ElementRef
+  @ViewChild('content', { static: false }) el!: ElementRef
   formapi: FormGroup
   obj: Master
   showForm: Boolean;
   arrayAll = [];
-  AllCompaniesdata:any []=[];  
-
+  AllCompaniesdata: any[] = [];
   isCreate: boolean = true;
   primaryKey: number;
   isSubmit: boolean = false;
@@ -29,37 +27,36 @@ export class Screen1Component implements OnInit {
   @ViewChild(DataTableDirective, { static: false })
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {
-  pagingType: 'full_numbers',
-  pageLength: 10,
-   };
-   createddate:any;
+    pagingType: 'full_numbers',
+    pageLength: 10,
+  };
+  createddate: any;
   constructor(private _service: Task1Service) { }
   ngOnInit(): void {
     debugger
     this.getAllAPIdata();
-    this.InitializeForm() ;
+    this.InitializeForm();
+
   }
   DataTableInitialization() {
-    debugger
     if (this.isDtInitialized) {
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
         this.dtTrigger.next(null);
       });
-    } else {  this.dtTrigger.next(null);
+    } else {
+      this.dtTrigger.next(null);
       this.isDtInitialized = true;
-     }
+    }
   }
-  GetCompanyDropdown() {
-    this._service.getCompanyList().subscribe(res => {
-      this.AllCompaniesdata = res;
-    });
-  }
+
   getAllAPIdata() {
+    debugger
     this._service.onGet().subscribe((data) => {
       try {
         this.arrayAll = data;
-      //  this. dtTrigger.next(data);
+        //  this. dtTrigger.next(data);
+
       }
       catch (e) {
         console.log(e, 'error');
@@ -71,37 +68,38 @@ export class Screen1Component implements OnInit {
       currency: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
       status: new FormControl(''),
+
       //mobile: new FormControl('',Validators.required)
     });
   }
   getValues() {
-    const currency=this.trimSpaces(this.formapi.value.currency);
-    const country=this.trimSpaces(this.formapi.value.country);
-            this.obj = {
+    const currency = this.trimSpaces(this.formapi.value.currency);
+    const country = this.trimSpaces(this.formapi.value.country);
+    this.obj = {
       sNo: this.isCreate ? 0 : this.primaryKey,
       currency: currency,
-      
+
       country: country,
       status: +this.formapi.value.status,
     }
   }
-  trimSpaces(text:string):string{
-return text.replace(/\s+/g, "");
+  trimSpaces(text: string): string {
+    return text.replace(/\s+/g, "");
   }
+  
   onpopup() {
     this.showForm = true;
-    this.isSubmit=false;
+    this.isSubmit = false;
     // this.isCreate = true;
     { { this.isCreate ? "Create" : "Update" } }
   }
   closePopup() {
-    this.showForm=true;
+    this.showForm = true;
     this.formapi.reset();
-    if(this.isCreate==false)
-    {
+    if (this.isCreate == false) {
       this.isCreate = true;
     }
-          this.showForm=false;
+    this.showForm = false;
   }
   PostToApi() {
     debugger
@@ -139,9 +137,8 @@ return text.replace(/\s+/g, "");
           this.onpopup();
           this.setvalue();
         }
-        else if ( data.data == '') {
-          if(this.obj.sNo==0)
-          {
+        else if (data.data == '') {
+          if (this.obj.sNo == 0) {
             Swal.fire({
               text: 'DO YOU WANT TO CREATE?',
               icon: 'question',
@@ -163,7 +160,7 @@ return text.replace(/\s+/g, "");
               }
             });
           }
-          else{
+          else {
             Swal.fire({
               text: 'DO YOU WANT TO UPDATE?',
               icon: 'question',
@@ -208,12 +205,13 @@ return text.replace(/\s+/g, "");
     this.closePopup();
     this.formapi.reset();
   }
+
   Update() {
     debugger
     this.isCreate = false;
     this.primaryKey = this.obj.sNo;
     this.getValues();
-   
+
     this.AlreadyExist();
     this.closePopup();
     this.formapi.reset();
@@ -236,6 +234,13 @@ return text.replace(/\s+/g, "");
     this.formapi.controls['currency'].setValue(this.obj.currency)
     this.formapi.controls['country'].setValue(this.obj.country)
     this.formapi.controls['status'].setValue(this.obj.status)
+    if (this.obj?.status == 0) {
+      this.formapi.disable();
+      this.status == 1;
+    }
+    else {
+      this.formapi.enable();
+    }
   }
 }
 

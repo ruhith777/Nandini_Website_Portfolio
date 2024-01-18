@@ -1,0 +1,81 @@
+.container {
+    max-height: 400px; /* Set a maximum height for the container, adjust as needed */
+    overflow-y: auto; /* Show vertical scrollbars when content overflows vertically */
+    overflow-x: auto; /* Show horizontal scrollbars when content overflows horizontally */
+  }
+/* 
+
+  .modal-content{
+    border: 0px !important;
+  }
+  
+  table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+   margin-top: 1em
+    }
+  
+  td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    .modalW {
+      top: 50%;
+      left: 50%;
+      transform: translate(0%, 0%);
+      width: 700px;
+      height: 1000px;
+      background-color: white;
+      border: 1px solid black;
+      padding: 20px;
+      z-index: 1;
+    }
+  
+    .btn-text-right{
+      text-align: right;
+      position: center;
+      margin-top: 1em;
+    }
+  thead{
+  
+      background-color: rgb(52, 174, 255);
+  
+      color: white;
+  
+   
+  
+    }
+  
+   
+  
+    i.fa{
+  
+      color: white;
+  
+      background-color: rgb(52, 174, 255);
+  
+      padding: 5px;
+  
+      border-radius: 5px;
+  
+     
+  
+    }
+  
+   
+  
+    #tableName{
+  
+      width: 100%;
+  
+      background-color: rgb(196, 194, 194);
+  
+      padding: 5px;
+  
+      font-weight: bold;
+  
+      margin-top: 5px;
+  
+    } */

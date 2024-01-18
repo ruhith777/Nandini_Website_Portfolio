@@ -1,0 +1,23 @@
+#audree_logo{
+    width: 100px;
+    height: 90px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  li {
+    margin: 10px;
+  }
+  a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  a.active {
+    background-color: #ddd;
+  }

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<div>
+    <h2>Organization:</h2>
+    <button class="btn btn-success mt22" (click)="onpopup()"><span class="fa fa-plus-circle"></span>Create</button>
+    &nbsp;
+    <table class="table table-bordered table-striped datatable" datatable [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>CompanyName</th>
+                <th>PlantName</th>
+                <th>Status</th>
+                <th>OwnerName</th>
+                <th>Email</th>
+                <th>PinCode</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data, index as index">
+                <td>{{index+1}}</td>
+                <td>{{item.companyName}}</td>
+                <td>{{item.plantName}}</td>
+                <td>{{item.status?'Enable':'Disable'}}</td>
+                <td>{{item.ownerName}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.pinCode}}</td>
+                <td> <button class="btn btn-primary" type="submit" (click)="edit(item.id)"><i
+                            class="fa fa-pencil"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="p-5">
+    <div class="col-md-12">
+        <div class="modalW" role="dialog" *ngIf="showForm" data-backdrop="false">
+            <div style="padding: 0px 250px 0px 250px;" class="modal-content">
+                <form [formGroup]="myForm">
+                    <div class="modal-body">
+                        <button Name="button" align="right" class="btn btn-danger" (click)="closePopup()"
+                            data-dismiss="modal">X</button>
+                        <h2 *ngIf="isCreate" class="modal-title">Create</h2>
+                        <h2 *ngIf="!isCreate" class="modal-title">Update</h2>
+                        <div class="container">
+                            <div class="form-group"> <label for="company_Id">CompanyName<span
+                                        style="color: red;">*</span></label> <select formControlName="company_Id"
+                                    class="form-control">
+                                    <option value="" hidden [selected]="true">--Select--</option>
+                                    <option *ngFor="let i of AllCompaniesdata" [value]="i.id">{{i.companyName}}
+                                    </option>
+                                </select>
+                            </div>
+                            
+                                <div class="form-group"> <label for="plant_Id">PlantName<span
+                                            style="color: red;">*</span></label>
+                                    <select class="form-control" formControlName="plant_Id">
+                                        <option value="" hidden [selected]="true">--Select--</option>
+                                        <option *ngFor="let i of AllPlantsdata" [value]="i.id">
+                                            {{i.plantName}}
+                                    </select>
+                                </div>
+                            <div *ngIf="isFieldVisible">
+                                <div class="form-group"> <label for="ownerName">OwnerName<span
+                                            style="color: red;">*</span></label> <input type="text" class="form-control"
+                                        id="ownerName" formControlName="ownerName" placeholder="Please Enter OwnerName">
+                                </div>
+                                <div style="color: red;" *ngIf="isSubmit && this.myForm.get('ownerName').errors">
+                                    OwnerName is required
+                                </div>
+                                <div class="form-group"> <label for="email">Email<span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="email" formControlName="email"
+                                        placeholder="Please Enter Email">
+                                    <div style="color: red;" *ngIf="isSubmit && this.myForm.get('email').errors">
+                                        Email is required
+                                    </div>
+                                </div>
+                                <div class="form-group"> <label for="pinCode">PinCode<span
+                                            style="color: red;">*</span></label> <input type="text" class="form-control"
+                                        id="pinCode" formControlName="pinCode" placeholder="Please Enter PinCode"
+                                        maxlength="6">
+                                    <div style="color: red;" *ngIf="isSubmit && this.myForm.get('pinCode').errors">
+                                        PinCode is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!isCreate">
+                                <label for="status">Status<span style="color: red;">*</span></label>
+                                <input type="checkbox" id="enable" name="status" value="1" formControlName="status">
+                                <label for="enable">Enable</label>
+                            </div>
+                            <div *ngIf="!isCreate">
+                                <div class="form-group"> <label for="comments">Comments<span
+                                            style="color: red;">*</span></label>
+                 <input type="text" class="form-control" id="comments" formControlName="comments" placeholder="{{this.strComment}}"> </div>
+                            </div>
+
+                            <div style="text-align: right;">
+                                <button *ngIf="isCreate" class="btn btn-success mt22" type="submit"
+                                    (click)="add()"><span class="fa fa-plus-circle"></span>Add</button>
+                            </div>
+                            <button *ngIf="!isCreate" class="btn btn-primary" type="submit"
+                                (click)="updateArray()">UpdateRecord</button>
+                            <div *ngIf="this.List!=0">
+                                <table class="table table-bordered table-striped dateTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="0.1">S.No</th>
+                                            <th width="0.1">OwnerName</th>
+                                            <th width="0.1">Email</th>
+                                            <th width="0.1">PinCode</th>
+                                            <th width="0.1">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of List; let i = index">
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.ownerName}}</td>
+                                            <td>{{item.email}}</td>
+                                            <td>{{item.pinCode}}</td>
+                                            <td>
+                                                <button *ngIf="isCreate" class="btn btn-danger mt22" (click)="Remove()"
+                                                    type="submit"><span class="fa fa-minus-circle"></span></button>
+
+                                                <button *ngIf="!isCreate" class="btn btn-primary" (click)="EditList(i)"
+                                                    type="submit">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="updateFlag || List.length > 0">
+                                    <button class="btn btn-primary" type="submit" (click)="onSubmit()">{{isCreate ?
+                                        "Submit" :
+                                        "Update"}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>

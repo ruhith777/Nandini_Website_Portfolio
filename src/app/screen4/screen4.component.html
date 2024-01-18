@@ -1,0 +1,72 @@
+<div class="p-5">
+    <div class="btn-text-right">
+        <button class="btn btn-success mt22" (click)="onpopup()"><span class="fa fa-plus-circle" ></span> Create</button>
+    </div>
+   <app-commonpopup [(visible)]="showForm" title="Screen1" onClose="closePopup()">
+                <form [formGroup]="formapi">
+                    <button Name="button" align="right" class="btn btn-danger" (click)="closePopup()" data-dismiss="modal">&times;</button>
+                    <h2 *ngIf="isCreate" class="modal-title">Create</h2>
+                    <h2 *ngIf="!isCreate" class="modal-title">Update</h2>
+                    <div class="col-md-12">
+                        <label for="companyName">Company Name<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" formControlName="companyName" placeholder="Enter Company Name"
+                            appTrim >
+                            <div style="color: red;" *ngIf="isSubmit && this.formapi.get('companyName').errors">
+                                Company Name is required
+                              </div>
+                        <label for="companyCode">Company Code<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" formControlName="companyCode"
+                            placeholder="Enter Company Code" appTrim >
+                            <div style="color: red;" *ngIf="isSubmit && this.formapi.get('companyCode').errors">
+                                Company Code is required
+                              </div>
+                            <label for="address">Address<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" formControlName="address"
+                                placeholder="Enter Company Code" appTrim >
+                                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('address').errors">
+                                    Address is required
+                                  </div>
+                        <div *ngIf="!isCreate">
+                            <label for="status">status<span style="color:red;">*</span></label>
+                            <input type="checkbox" id="enable" name="status" value="1" formControlName="status"
+                                placeholder="Enter Status">
+                            <label for="enable">Enable</label>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" (click)="isCreate ? Submit() : Update()">{{isCreate ?"Create" :
+                            "Update"}}</button>
+                        &nbsp;
+                        <button class="btn btn-danger" (click)="Cancel()">Cancel</button>
+                        &nbsp;
+                        <button class="btn btn-warning" (click)="Reset()">Reset</button>
+                    </div>
+                </form>
+            </app-commonpopup>
+        
+<h3>List</h3>
+<div>
+        <table datatable [dtTrigger]="dtTrigger">
+        <thead>
+            <tr>
+                <th>Sno</th>
+                <th>CompanyName</th>
+                <th>CompanyCode</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of arrayAll,let i=index ">
+                <td>{{i+1}}</td>
+                <td>{{item.companyName}}</td>
+                <td>{{item.companyCode}}</td>
+                <td>{{item.address}}</td>
+                <td>{{item.status?'Enable':'Disable'}}</td>
+                <td>
+                    <a class="btn btn-primary" (click)="OnEdit(item.id)"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

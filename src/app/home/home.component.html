@@ -1,0 +1,10 @@
+<div style="display: inline-block;" *ngFor="let p of array">
+    <div  class="flex-item" *ngIf="p.tableName === 'Organization'" [routerLink]="['/screen1']">{{ p.tableName }}</div>
+    <div  class="flex-item" *ngIf="p.tableName === 'Plant'" [routerLink]="['/screen2']">{{ p.tableName }}</div>
+    <div  class="flex-item" *ngIf="p.tableName === 'Vendor'" [routerLink]="['/screen3']">{{ p.tableName }}</div>
+    <div  class="flex-item" *ngIf="p.tableName === 'Company'" [routerLink]="['/screen4']">{{ p.tableName }}</div>
+    <div  class="flex-item" *ngIf="p.tableName === 'Student'" [routerLink]="['/screen5']">{{ p.tableName }}</div>
+
+    <div  class="flex-item" *ngIf="p.tableName === 'Screen3'" [routerLink]="['/screen5']">{{ p.tableName }}</div>
+</div>
+    <router-outlet></router-outlet>  

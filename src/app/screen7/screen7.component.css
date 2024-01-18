@@ -1,0 +1,5 @@
+.container {
+    max-height: 400px; /* Set a maximum height for the container, adjust as needed */
+    overflow-y: auto; /* Show vertical scrollbars when content overflows vertically */
+    overflow-x: auto; /* Show horizontal scrollbars when content overflows horizontally */
+  }

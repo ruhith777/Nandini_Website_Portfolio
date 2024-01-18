@@ -1,0 +1,72 @@
+<div>  
+    <button class="btn btn-primary" style="float: right;" (click)="openPopUp()">Create</button>
+            <table>
+        <thead>
+           
+            <tr>          
+                <th>Id</th>    
+                <th>Table Name</th>    
+                <th>Status</th>
+                <th>Action</th>                          
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of array let i=index">  
+                <td>{{i+1}}</td>              
+                <!-- <td>{{ p.tableName }}</td> -->
+               
+    <td> <a *ngIf="p.tableName === 'Organization'" [routerLink]="['/screen1']">{{ p.tableName }}</a>
+    <a *ngIf="p.tableName === 'Plant'" [routerLink]="['/screen2']">{{ p.tableName }}</a>
+    <a *ngIf="p.tableName === 'Vendor'" [routerLink]="['/screen3']">{{ p.tableName }}</a>
+    <a *ngIf="p.tableName === 'Company'" [routerLink]="['/screen4']">{{ p.tableName }}</a>
+
+    <a *ngIf="p.tableName === 'Student'" [routerLink]="['/screen5']">{{ p.tableName }}</a>
+
+    <a *ngIf="p.tableName === 'Screen3'" [routerLink]="['/screen5']">{{ p.tableName }}</a>
+</td>
+
+    <td>{{p.status?'Enable':'Disable'}}</td>
+                <td><a class="btn btn-primary" (click)="Edit(p.id)">Edit <i class="fa fa-pencil"></i></a></td>
+ 
+            </tr>
+        </tbody>
+    </table>  
+    <div *ngIf="createDialog">
+        <div class="modalW">
+            <div class="modal-header">
+                <h4 class="modal-title">{{isCreate? 'Create' : 'Update'}}</h4>
+                <button type="button" class="close" (click)="closePopup()">X</button>
+            </div>
+            <div class="modal-body" >
+                <form [formGroup]="orgdetails" >
+                    <div class="form-group" >
+                        <label for="tableName">Table Name</label>
+                        <input type="text" class="form-control" formControlName="tableName">
+                        <div class="error-message"
+                            *ngIf="orgdetails.get('tableName').invalid && (orgdetails.get('tableName').dirty || isflag)">
+                            *The tableName field cannot be empty
+                        </div>
+                    </div>
+                    <br>
+                    <div *ngIf="!isCreate">
+                        <label for="status">status<span style="color:red;">*</span></label>
+                        <input type="checkbox" id="enable" name="status" value="1" formControlName="status"
+                            placeholder="Enter Status">
+                           
+                        <label for="enable">Enable</label>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="status" class="yes" >status</label>
+                        <input type="checkbox"  name="status" class="form-control" formControlName="status">
+                        <div class="error-message"
+                            *ngIf="orgdetails.get('status').invalid && (orgdetails.get('status').dirty || isflag)">
+                            *The status you entered is not valid
+                        </div>
+                    </div> -->
+                    <div>                                  
+                        <button type="button" (click)="OnCreate()">Submit</button>
+                    </div>
+                </form>  
+        </div>                                                              
+    </div>    
+</div>

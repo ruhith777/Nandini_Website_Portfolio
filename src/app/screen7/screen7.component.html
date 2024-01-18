@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<div>
+    <h2>Vendor:</h2>
+    <button class="btn btn-success mt22" (click)="onpopup()"><span class="fa fa-plus-circle"></span>Create</button>
+    &nbsp;
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>CompanyName</th>
+                <th>VendorName</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data, index as index">
+                <td>{{index+1}}</td>
+                <td>{{item.companyName}}</td>
+                <td>{{item.vendorName}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.status?'Enable':'Disable'}}</td>
+                <td> <button class="btn btn-primary" type="submit" (click)="edit(item.id)"><i
+                            class="fa fa-pencil"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="p-5">
+    <div class="col-md-12">
+        <div class="modalW" role="dialog" *ngIf="showForm" data-backdrop="false">
+            <div style="padding: 0px 250px 0px 250px;" class="modal-content">
+                <form [formGroup]="myForm">
+                    <div class="modal-body">
+                        <button Name="button" align="right" class="btn btn-danger" (click)="closePopup()"
+                            data-dismiss="modal">X</button>
+                        <h2 *ngIf="isCreate" class="modal-title">Create</h2>
+                        <h2 *ngIf="!isCreate" class="modal-title">Update</h2>
+                        <div class="container">
+                            <div class="form-group"> <label for="company_Id">CompanyName<span
+                                        style="color: red;">*</span></label> <select formControlName="company_Id"
+                                    class="form-control">
+                                    <option value="" hidden [selected]="true">--Select--</option>
+                                    <option *ngFor="let i of AllCompaniesdata" [value]="i.id">{{i.companyName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group"> <label for="vendorName">VendorName<span
+                                style="color: red;">*</span></label> <input type="text" class="form-control"
+                            id="vendorName" formControlName="vendorName" placeholder="Please Enter VendorName">
+                    </div>
+                    <div class="form-group"> <label for="date">Date<span
+                        style="color: red;">*</span></label> <input type="datetime" class="form-control"
+                    id="date" formControlName="date" placeholder="Please Enter Date">
+            </div>
+                            <div *ngIf="isFieldVisible">
+                                <div class="form-group"> <label for="instrumentId">InstrumentId<span
+                                            style="color: red;">*</span></label> <input type="text" class="form-control"
+                                        id="instrumentId" formControlName="instrumentId" placeholder="Please Enter InstrumentId">
+                                </div>
+                                <div style="color: red;" *ngIf="isSubmit && this.myForm.get('instrumentId').errors">
+                                    InstrumentId is required
+                                </div>
+                                <div class="form-group"> <label for="instrumentName">InstrumentName<span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="instrumentName" formControlName="instrumentName"
+                                        placeholder="Please Enter InstrumentName">
+                                    <div style="color: red;" *ngIf="isSubmit && this.myForm.get('instrumentName').errors">
+                                        InstrumentName is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!isCreate">
+                                <label for="status">Status<span style="color: red;">*</span></label>
+                                <input type="checkbox" id="enable" name="status" value="1" formControlName="status">
+                                <label for="enable">Enable</label>
+                            </div>
+                            <div *ngIf="!isCreate">
+                                <div class="form-group"> <label for="comments">Comments<span
+                                            style="color: red;">*</span></label> <input type="text" class="form-control"
+                                        id="comments" formControlName="comments" placeholder="{{this.strComment}}"> </div>
+                            </div>
+
+                            <div style="text-align: right;">
+                                <button *ngIf="isCreate" class="btn btn-success mt22" type="submit"
+                                    (click)="add()"><span class="fa fa-plus-circle"></span>Add</button>
+                            </div>
+                            <button *ngIf="!isCreate" class="btn btn-primary" type="submit"
+                                (click)="updateArray()">UpdateRecord</button>
+                            <div *ngIf="this.List!=0">
+                                <table class="table table-bordered table-striped dateTable">
+                                    <thead>
+                                        <tr>
+                                            <th width="0.1">S.No</th>
+
+                                            <!-- <th width="0.1">CompanyName</th> -->
+                                            <!-- <th width="0.1">VendorName</th> -->
+
+                                            
+                                            <th width="0.1">InstrumentId</th>
+                                            <th width="0.1">InstrumentName</th>
+                                            <th width="0.1">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of List; let i = index">
+                                            <td>{{i+1}}</td>
+                                            <!-- <td>{{item.companyName}}</td> -->
+                                            <!-- <td>{{item.vendorName}}</td> -->
+                                            <td>{{item.instrumentId}}</td>
+                                            <td>{{item.instrumentName}}</td>
+                                            <td>
+                                                <button *ngIf="isCreate" class="btn btn-danger mt22" (click)="Remove()"
+                                                    type="submit"><span class="fa fa-minus-circle"></span></button>
+
+                                                <button *ngIf="!isCreate" class="btn btn-primary" (click)="EditList(i)"
+                                                    type="submit">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="updateFlag || List.length > 0">
+                                    <button class="btn btn-primary" type="submit" (click)="onSubmit()">{{isCreate ?
+                                        "Submit" :
+                                        "Update"}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>

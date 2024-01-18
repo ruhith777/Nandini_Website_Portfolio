@@ -1,0 +1,148 @@
+<div class="p-5">
+    <div class="btn-text-right">
+        <button class="btn btn-success mt22" (click)="onpopup()"><span class="fa fa-plus-circle" ></span> Create</button>
+    </div>
+
+    <div id="tableName"> Country Currency</div>
+
+    <div class="modalW" role="dialog" *ngIf="showForm" data-backdrop="false">
+        <div style="padding: 0px 250px 0px 250px;" class="modal-content">
+            <div class="modal-body">
+               
+                <form [formGroup]="formapi">
+                    <button Name="button" align="right" class="btn btn-danger" (click)="closePopup()" data-dismiss="modal">&times;</button>
+                    <h2 *ngIf="isCreate" class="modal-title">Create</h2>
+                    <h2 *ngIf="!isCreate" class="modal-title">Update</h2>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="yes">Country: </label>
+
+                            <select class="form-control" formControlName="country_Id" (change)="Onchange()">
+                                <div style="color: red;" *ngIf="isSubmit && this.formapi.get('country').errors">
+                                    Country field is required
+                                </div>
+                                <option [ngValue]="null" placeholder="--select--">--Select--</option>
+                                <option *ngFor="let item of arrayAllData" [value]="item.id">
+                                    {{item.country}}
+                                </option>
+
+                            </select>
+                        </div>
+                        <label for="Currency">Currency: <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" formControlName="currency" placeholder="Enter Currency"
+                            appTrim [disabled]>
+                        <label for="CountryCode">CountryCode: <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" formControlName="countryCode"
+                            placeholder="Enter Country Code" appTrim [disabled]>
+
+                        <div *ngIf="!isCreate">
+                            <label for="status">status: <span style="color:red;">*</span></label>
+                            <input type="checkbox" id="enable" name="status" value="1" formControlName="status"
+                                placeholder="Enter Status">
+
+                            <label for="enable">Enable</label>
+                        </div>
+
+
+                        <div class="form-group ">
+                            <div style="color: red" *ngIf="isSubmit && this.formapi.get('requiredYesOrNo').errors">
+                                Please Select Required / Not Required
+                            </div>
+
+                            <div class="grid-container">
+                                <div class="grid-item">
+                                    <label for="Required">Required </label>
+                                    <input class="m-1" type="radio" id="required" name="requiredYesOrNo"
+                                        formControlName="requiredYesOrNo" value="1"
+                                        (click)="ShowRequired($event.target)" appTrim />
+
+                                </div>
+                                <div class="grid-item">
+                                    <label for="Required">Not Required </label>
+                                    <!-- radio -->
+                                    <input class="m-1" type="radio" id="not_required" name="requiredYesOrNo"
+                                        formControlName="requiredYesOrNo" value="0"
+                                        (click)="ShowRequired($event.target)" appTrim />
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isRequired">
+
+                            <label for="plantName">Plant Name : </label>
+                            <input type="text" class="form-control m-1" formControlName="plantName" appTrim />
+                            <div style="color: red"
+                                *ngIf="isSelected && isSubmit && this.formapi.get('plantName').errors">
+                                Please Enter Plant Name
+                            </div>
+
+                            <label for="plantName">Plant Address : </label>
+                            <input type="text" class="form-control" formControlName="plantAddress" appTrim />
+                            <div style="color: red" *ngIf="isSubmit && this.formapi.get('plantAddress').errors">
+                                Please Enter Address
+                            </div>
+                        </div>
+
+                        <div *ngIf="isNotRequired">
+                            <label for="plantName">Plant Name : </label>
+                            <input type="text" class="form-control" formControlName="plantName" appTrim />
+                            <div style="color: red"
+                                *ngIf="isSelected && isSubmit && this.formapi.get('plantName').errors">
+                                Please Enter Plant Name
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="!isCreate">
+                            <label for="comments">Comments<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" formControlName="comments" appTrim
+                                placeholder="{{this.strComment}}">
+                            <div style="color: red;" *ngIf="isSubmit && this.formapi.get('comments').errors">
+                                Comments required
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" (click)="isCreate ? Submit() : Update()">{{isCreate ?"Create" :
+                            "Update"}}</button>
+                        &nbsp;
+
+                        <button class="btn btn-danger" (click)="Cancel()">Cancel</button>
+                        &nbsp;
+
+                        <button class="btn btn-warning" (click)="Reset()">Reset</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<h3>List</h3>
+<div>
+    <table class="table table-bordered datatable" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Country</th>
+                <th>Currency</th>
+                <th>CountryCode</th>
+                <th>Status</th>
+                <th>RequiredYesOrNo</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of arrayAll,let i=index ">
+                <td>{{i+1}}</td>
+                <td>{{item.country}}</td>
+                <td>{{item.currency}}</td>
+                <td>{{item.countryCode}}</td>
+                <td>{{item.status?'Enable':'Disable'}}</td>
+                <td>{{item.requiredYesOrNo?'Yes':'No'}}</td>
+                <td>
+                    <a class="btn btn-primary" (click)="OnEdit(item.id)"><i class="fa fa-pencil"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

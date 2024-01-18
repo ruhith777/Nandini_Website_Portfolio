@@ -1,1 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
+form{
+     position: fixed; /* Change to 'fixed' for a popup that stays in the same position relative to the viewport */
+    top: 50%; /* Vertically center the form */
+    left: 50%; /* Horizontally center the form */
+    transform: translate(-50%, -50%); /* Center the form precisely */
+    max-width: 450px;
+     padding: 40px;
+    background-color: rosybrown;
+    border: 1px grey;
+    border-radius: 10px;
+    box-shadow: black;
+    z-index: 1000;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin-top: 1em;
+    width: 100%;
+  }
+  .btn-text-right{
+    text-align: right;
+    position: center;
+  }
+  td, th {
+    border: black;
+    border-style: dotted;
+    text-align: left;
+    padding: 8px;
+  }
+  label {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color:black; 
+  }
+  .btn{
+  padding-left: 80px;
+  position: relative;
+  }
+  #tableName{
+    width: 100%;
+    background-color:grey;
+    padding: 5px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  .row{
+    margin-right: 7000px;
+    margin-left: 70px;
+  }
+  .flex-item {
+    box-shadow: 5px -2px 8px 5px #ccc;
+    padding: 15px 14px;
+    border-radius: 5px;
+    margin: 15px 15px;
+    text-align: center;
+    font-size: 14px;
+    width: 160px;
+    height: 160px;
+    /* transition: ease-in .3s; */
+    transition: 0.3s;
+    color: #035cb1;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+.flex-item:hover {
+  cursor: pointer;
+  transition: ease-in .3s;
+  transform: scale(1.1);
+  border-bottom: 4px solid #ff8d00;
+}
+
+
